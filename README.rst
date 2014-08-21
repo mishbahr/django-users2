@@ -33,7 +33,7 @@ Features
 * handy mixins to control a user’s access to views (borrowed from django-braces)
 * automatically creates superuser after syncdb (really handy during the initial development phases)
 * built in emails/passwords validators (with lots of customisable options)
-* prepackaged with all the templates, including additional templates required by views in `django.contrib.auth` (for a painless signup process)
+* prepackaged with all the templates, including additional templates required by views in ``django.contrib.auth`` (for a painless signup process)
 
 
 Documentation
