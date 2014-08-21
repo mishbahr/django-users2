@@ -57,7 +57,7 @@ Quickstart
         ...
     )
 
-3. Set your `AUTH_USER_MODEL` setting to use `EmailUser``::
+3. Set your `AUTH_USER_MODEL` setting to use `users.User`::
 
     AUTH_USER_MODEL = 'users.User'
 
