@@ -36,30 +36,6 @@ Features
 * prepackaged with all the templates (for a painless signup process), this include
 additional templates required by views in `django.contrib.auth`
 
-    └── users
-        ├── activate.html
-        ├── activation_complete.html
-        ├── activation_email.html
-        ├── activation_email_subject.html
-        ├── login.html
-        ├── logout.html
-        ├── partials
-        │   ├── errors.html
-        │   ├── field.html
-        │   └── honeypot.html
-        ├── password_change_done.html
-        ├── password_change_form.html
-        ├── password_reset_complete.html
-        ├── password_reset_confirm.html
-        ├── password_reset_done.html
-        ├── password_reset_email.html
-        ├── password_reset_form.html
-        ├── password_reset_subject.html
-        ├── profile.html
-        ├── registration_closed.html
-        ├── registration_complete.html
-        └── registration_form.html
-
 
 Documentation
 -------------
