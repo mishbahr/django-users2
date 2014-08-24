@@ -28,6 +28,7 @@ try:
         SITE_ID=1,
         NOSE_ARGS=['-s'],
         AUTH_USER_MODEL='users.User',
+        USERS_CREATE_SUPERUSER=False,
     )
 
     try:
