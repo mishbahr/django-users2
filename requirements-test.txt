@@ -7,4 +7,5 @@ django-nose>=1.2
 flake8>=2.1.0
 tox>=1.7.0
 
-# Additional test requirements go here
+django-appconf==0.6
+django-model-utils==2.2
