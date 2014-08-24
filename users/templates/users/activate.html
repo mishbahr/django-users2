@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<p>{% trans "Account activation failed" %}</p>
+{% if invalid_code %}
+	<p>Invalid Code: {{ error_message }}</p>
+{% endif %}
+{% if code_expired %}
+	<p>Activation Link Expired: {{ error_message }}</p>
+{% endif %}
+{% endblock %}

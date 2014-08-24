@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/boxes/admin.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/boxes/forms.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/boxes/models.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/boxes/views.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/boxes/widgets.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/customers/forms.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/dashboard/models.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/my_account/forms.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/my_account/urls.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/my_account/views.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/my_account/widgets.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/stores/admin.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/stores/models.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/website/context_processor.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/website/forms/widgets.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/website/helpers.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/website/plugins/carousel/cms_plugins.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/website/plugins/image/cms_plugins.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/website/plugins/link/cms_plugins.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/website/plugins/link/models.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/website/plugins/price_slider/cms_plugins.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/website/plugins/price_slider/forms.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/apps/website/plugins/price_slider/models.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/bower.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/config/settings_cms.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/config/settings_common.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/config/settings_local.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/config/settings_site.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/config/settings_test.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/config/urls.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/gulp/build_website.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/gulp/watch.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/requirements.txt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/static/dashboard/scripts/main.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/static/website/scripts/main.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/static/website/scripts/price-calculator.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/static/website/styles/main.scss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/emails/contract_expired.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/frontend/base.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/frontend/boxes/arrange_collection.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/frontend/boxes/arrange_drop_off.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/frontend/boxes/create_order.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/frontend/boxes/partials/order_summary.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/frontend/boxes/update.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/frontend/customers/register.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/frontend/my_account/box_details.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/frontend/partials/my_account_nav.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/frontend/style_guide_components/price_slider.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/frontend/website/plugins/link.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/frontend/website/plugins/price_slider.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-box/templates/website/forms/widgets/slider_input.html" charset="UTF-8" />
+  </component>
+</project>
+

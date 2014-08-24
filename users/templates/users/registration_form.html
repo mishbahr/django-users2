@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="form-wrapper">
+	<form method="post" action=".">
+		{% if form.errors %}
+			{% include "users/partials/errors.html" %}
+		{% endif %}
+		{% csrf_token %}
+		{% for field in form %}
+			{% include "users/partials/field.html" %}
+		{% endfor %}
+		<div class="button-wrapper submit">
+			<input type="submit" value="{% trans 'Register' %}" />
+		</div>
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% load form_tags %}
+
+<div class="field-wrapper {{ field|input_class }} {{ field.css_classes }}{% if field|is_checkbox %} checkbox{% endif %}" style="border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px;">
+	{% if field.errors %}
+		<ul class="errorlist">
+			{{ field.errors|unordered_list }}
+		</ul>
+	{% endif %}
+	{% if field|is_checkbox %}
+		{{ field }}
+	{% endif %}
+	<label for="{{ field.id_for_label }}">
+		{{ field.label }}
+	</label>
+	{% if not field|is_checkbox %}
+		{{ field }}
+	{% endif %}
+	{% if field.help_text %}
+		<div class="help_text">{{ field.help_text|safe }}</div>
+	{% endif %}
+</div>
+
+

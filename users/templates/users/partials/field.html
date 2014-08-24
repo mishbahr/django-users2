@@ -1,0 +1,29 @@
+{% load form_tags %}
+
+{% if field.is_hidden %}
+    {{ field }}
+{% elif field|is_honeypot %}
+	{% include "users/partials/honeypot.html" %}
+{% else %}
+	<div class="field-wrapper {{ field|input_class }} {{ field.css_classes }}{% if field|is_checkbox %} checkbox{% endif %}">
+		{% if field.errors %}
+			<ul class="errorlist">
+				{{ field.errors|unordered_list }}
+			</ul>
+		{% endif %}
+		{% if field|is_checkbox %}
+			{{ field }}
+		{% endif %}
+		<label for="{{ field.id_for_label }}"{% if field.field.required %} class="required"{% endif %}>
+			{{ field.label }}{% if field.field.required %}<span class="asterisk">*</span>{% endif %}
+		</label>
+		{% if not field|is_checkbox %}
+			{{ field }}
+		{% endif %}
+		{% if field.help_text %}
+			<div class="help_text">{{ field.help_text|safe }}</div>
+		{% endif %}
+	</div>
+{% endif %}
+
+

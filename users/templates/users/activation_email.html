@@ -1,0 +1,16 @@
+{% load i18n %}
+
+{% trans "Thank you for registering an account at" %} {{ site.name }}
+{% trans "To activate your registration, please visit the following page:" %}
+
+{{ protocol }}://{{ site.domain }}{% url 'users_activate' token %}
+
+{% blocktrans %}This link will expire in {{ expiration_days }} days.{% endblocktrans %}
+
+{% trans "If you didn't register this account you can simply delete this email and we won't bother you again." %}
+
+
+
+
+
+
