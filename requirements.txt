@@ -1,3 +1,4 @@
 django>=1.5.1
 wheel==0.23.0
-# Additional requirements go here
+django-appconf==0.6
+django-model-utils==2.2
