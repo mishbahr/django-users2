@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from datetime import date, timedelta
 from django.test import TestCase
 from django.test.client import RequestFactory
 from django.core.urlresolvers import reverse
@@ -7,7 +8,10 @@ from django.core import mail
 from django.test.utils import override_settings
 from django.contrib.auth import get_user_model
 
-from users.utils import auto_create_superuser, send_activation_email
+from users.conf import settings
+from users.utils import (EmailActivationTokenGenerator,
+                         auto_create_superuser,
+                         send_activation_email)
 
 
 class CreateSuperuserTest(TestCase):
@@ -42,4 +46,46 @@ class SendActivationEmailTest(TestCase):
 
         send_activation_email(user=user, request=request)
         self.assertEqual(len(mail.outbox), 1)
+
+
+class EmailActivationTokenGeneratorTest(TestCase):
+    user_email = 'user@example.com'
+    user_password = 'pa$sw0Rd'
+
+    def create_user(self):
+        return get_user_model().objects.create_user(self.user_email, self.user_password)
+
+    def test_make_token(self):
+        """
+        Ensure that we can make a token and that it is valid
+        """
+        user = self.create_user()
+
+        token_generator = EmailActivationTokenGenerator()
+        token = token_generator.make_token(user)
+        self.assertTrue(token_generator.check_token(user, token))
+
+    def test_timeout(self):
+        """
+        Ensure we can use the token after n days, but no greater.
+        """
+        # Uses a mocked version of EmailActivationTokenGenerator
+        # so we can change the value of 'today'
+        class Mocked(EmailActivationTokenGenerator):
+            def __init__(self, today):
+                self._today_val = today
+
+            def _today(self):
+                return self._today_val
+
+        user = self.create_user()
+        token_generator = EmailActivationTokenGenerator()
+        token = token_generator.make_token(user)
+
+        p1 = Mocked(date.today() + timedelta(settings.USERS_EMAIL_CONFIRMATION_TIMEOUT_DAYS))
+        self.assertTrue(p1.check_token(user, token))
+
+        p2 = Mocked(date.today() + timedelta(settings.USERS_EMAIL_CONFIRMATION_TIMEOUT_DAYS + 1))
+        self.assertFalse(p2.check_token(user, token))
+
 
