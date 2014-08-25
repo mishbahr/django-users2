@@ -76,3 +76,74 @@ Quickstart
     )
 
 which sets up URL patterns for the views in django-users2 as well as several useful views in django.contrib.auth (e.g. login, logout, password change/reset)
+
+
+Configuration
+-----------------------
+Set ``USERS_VERIFY_EMAIL = True`` to enable email verification for registered users. 
+
+When a new ``User`` object is created, with its ``is_active`` field set to ``False``, an activation key is generated, and an email is sent to the user containing a link to click to activate the account::
+
+    USERS_VERIFY_EMAIL = False
+
+Upon clicking the activation link, the new account is made active (i.e. ``is_active`` field is set to ``True``); after this, the user can log in. Optionally, you can automatically login the user after successful activation::
+    
+    USERS_AUTO_LOGIN_ON_ACTIVATION = True
+
+This is the number of days the users will have, to activate their accounts after registering:: 
+
+   USERS_EMAIL_CONFIRMATION_TIMEOUT_DAYS = 3
+
+Automatically create django ``superuser`` after ``syncdb``, by default this option is enabled when ``settings.DEBUG = True``. 
+
+You can customise the email/password by overriding ``USERS_SUPERUSER_EMAIL`` and ``USERS_SUPERUSER_PASSWORD`` settings (highly recommended)::
+
+    USERS_CREATE_SUPERUSER = settings.DEBUG
+    USERS_SUPERUSER_EMAIL = 'superuser@djangoproject.com'
+    USERS_SUPERUSER_PASSWORD = 'django'  
+
+Prevent automated registration by spambots, by enabling a hidden (using css) honeypot field::
+
+    USERS_SPAM_PROTECTION = True
+
+Prevent user registrations by setting ``USERS_REGISTRATION_OPEN = False``::
+
+	USERS_REGISTRATION_OPEN = True
+
+
+Settings for validators, that check the strength of user specified passwords::
+    
+    # Specifies minimum length for passwords:
+    USERS_PASSWORD_MIN_LENGTH = 5
+
+    #Specifies maximum length for passwords:
+    USERS_PASSWORD_MAX_LENGTH = None
+	
+Optionally, the complexity validator, checks the password strength::
+
+	USERS_CHECK_PASSWORD_COMPLEXITY = True
+
+Specify number of characters within various sets that a password must contain::
+
+	USERS_PASSWORD_POLICY = {
+		'UPPER': 0,       # Uppercase 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+		'LOWER': 0,       # Lowercase 'abcdefghijklmnopqrstuvwxyz'
+		'DIGITS': 0,      # Digits '0123456789'
+		'PUNCTUATION': 0  # Punctuation """!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""
+	}
+
+Allow/disallow registration using emails addresses from specific domains::
+ 
+    USERS_VALIDATE_EMAIL_DOMAIN = True
+
+List of disallowed domains::
+
+    USERS_EMAIL_DOMAINS_BLACKLIST = []
+
+For example, ``USERS_EMAIL_DOMAINS_BLACKLIST = ['mailinator.com']`` will block all visitors from using mailinator.com email addresses to register.
+    
+List of allowed domains::
+
+    USERS_EMAIL_DOMAINS_WHITELIST = []
+
+For example, ``USERS_EMAIL_DOMAINS_WHITELIST = ['ljworld.com']`` will only allow user registration with ljworld.com domains.
