@@ -3,7 +3,7 @@
 {% trans "Thank you for registering an account at" %} {{ site.name }}
 {% trans "To activate your registration, please visit the following page:" %}
 
-{{ protocol }}://{{ site.domain }}{% url 'users_activate' token %}
+{{ protocol }}://{{ site.domain }}{% url 'users_activate' uid token %}
 
 {% blocktrans %}This link will expire in {{ expiration_days }} days.{% endblocktrans %}
 

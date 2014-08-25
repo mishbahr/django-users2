@@ -1,15 +1,18 @@
-import re
+from datetime import date
+from django.utils import six
 
 from django.db.models import signals
-from django.utils.translation import ugettext as _
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth import get_user_model
 from django.contrib.auth.management import create_superuser
 from django.contrib.auth import models as auth_app
 
+from django.utils.http import int_to_base36, base36_to_int
+from django.utils.crypto import constant_time_compare, salted_hmac
+
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
-from django.core import signing
-from django.utils.http import int_to_base36
 
 
 try:
@@ -48,52 +51,59 @@ signals.post_syncdb.connect(auto_create_superuser, sender=None)
 
 class EmailActivationTokenGenerator(object):
 
-    def __init__(self):
-        self.salt = 'XREFOJ^O1Mx_RGalPt_o3fQCZ7Uw=*vHGTb=_YVp2bK4m16Zw^Du9gz1uyVs'
-        self.signer = signing.TimestampSigner(salt=self.salt, sep='_')
-
-    def get_last_login_timestamp(self, user):
+    @staticmethod
+    def get_last_login_timestamp(user):
         if user.last_login is not None:
             return int(user.last_login.strftime('%s'))
         return 0
 
     def make_token(self, user):
-        if not user:
-            raise NameError('A user instance is required to generate an activation token')
-        code = [re.sub('[^A-Za-z0-9]+', '', user.email),
-                str(user.id),
-                int_to_base36(self.get_last_login_timestamp(user))]
-        return self.signer.sign(u'-'.join(code))
+        return self._make_token_with_timestamp(user, self._num_days(self._today()))
 
-    def validate_token(self, code):
-        max_age = settings.USERS_EMAIL_CONFIRMATION_TIMEOUT_DAYS * 86400
+    def check_token(self, user, token):
+        """
+        Check that a activation token is correct for a given user.
+        """
+        # Parse the token
+        try:
+            ts_b36, hash = token.split('-')
+        except ValueError:
+            return False
 
         try:
-            data = self.signer.unsign(code, max_age=max_age)
-        except signing.SignatureExpired:
-            raise CodeExpired(_('Activation key has expired'))
-        except signing.BadSignature:
-            raise InvalidCode(_('Unable to verify the activation key.'))
+            ts = base36_to_int(ts_b36)
+        except ValueError:
+            return False
 
-        parts = data.rsplit('-', 2)
-        if len(parts) != 3:
-            raise InvalidCode(_('Something went wrong while decoding the activation token.'))
+        # Check that the timestamp/uid has not been tampered with
+        if not constant_time_compare(self._make_token_with_timestamp(user, ts), token):
+            return False
 
-        email, uid, timestamp = parts
-        if uid and timestamp:
-            User = get_user_model()
-            try:
-                user = User.objects.get(pk=uid)
-            except (User.DoesNotExist, TypeError, ValueError):
-                raise InvalidCode(_('Something went wrong while decoding the activation token.'))
+        # Check the timestamp is within limit
+        if (self._num_days(self._today()) - ts) > settings.USERS_EMAIL_CONFIRMATION_TIMEOUT_DAYS:
+            return False
 
-            if timestamp != int_to_base36(self.get_last_login_timestamp(user)):
-                raise InvalidCode(_('The link has already been used.'))
+        return True
 
-        else:
-            user = None
+    def _make_token_with_timestamp(self, user, timestamp):
 
-        return user
+        ts_b36 = int_to_base36(timestamp)
+        key_salt = 'users.utils.EmailActivationTokenGenerator'
+        login_timestamp = self.get_last_login_timestamp(user)
+
+        value = (six.text_type(user.pk) + six.text_type(user.email) +
+                 six.text_type(login_timestamp) + six.text_type(timestamp))
+        hash = salted_hmac(key_salt, value).hexdigest()[::2]
+        return '%s-%s' % (ts_b36, hash)
+
+    @staticmethod
+    def _num_days(dt):
+        return (dt - date(2001, 1, 1)).days
+
+    @staticmethod
+    def _today():
+        # Used for mocking in tests
+        return date.today()
 
 
 def send_activation_email(
@@ -111,6 +121,7 @@ def send_activation_email(
             'site': current_site,
             'expiration_days': settings.USERS_EMAIL_CONFIRMATION_TIMEOUT_DAYS,
             'user': user,
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': token_generator.make_token(user=user),
             'protocol': 'https' if request.is_secure() else 'http',
         }

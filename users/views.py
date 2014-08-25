@@ -5,7 +5,9 @@ from django.core.urlresolvers import reverse
 from django.template.response import TemplateResponse
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
+from django.utils.http import urlsafe_base64_decode
 from django.shortcuts import resolve_url, redirect
+from django.contrib.auth import get_user_model
 from django.contrib.auth import login
 
 try:
@@ -14,7 +16,6 @@ except ImportError:
     from django.contrib.sites.models import get_current_site
 
 from .conf import settings
-from .exceptions import InvalidCode, CodeExpired
 from .utils import EmailActivationTokenGenerator, send_activation_email
 from .signals import user_registered, user_activated
 
@@ -113,6 +114,7 @@ def registration_complete(request,
 
 @never_cache
 def activate(request,
+             uidb64=None,
              token=None,
              template_name='users/activate.html',
              post_activation_redirect=None,
@@ -126,21 +128,18 @@ def activate(request,
     if post_activation_redirect is None:
         post_activation_redirect = reverse('users_activation_complete')
 
-    token_decoder = EmailActivationTokenGenerator()
+    UserModel = get_user_model()
+    assert uidb64 is not None and token is not None
+
+    token_generator = EmailActivationTokenGenerator()
 
     try:
-        user = token_decoder.validate_token(token)
-    except InvalidCode as e:
-        context.update({
-            'invalid_code': True,
-            'error_message': str(e)
-        })
-    except CodeExpired as e:
-        context.update({
-            'code_expired': True,
-            'error_message': str(e)
-        })
-    else:
+        uid = urlsafe_base64_decode(uidb64)
+        user = UserModel._default_manager.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
+        user = None
+
+    if user is not None and token_generator.check_token(user, token):
         user.activate()
         user_activated.send(sender=user.__class__, request=request, user=user)
         if settings.USERS_AUTO_LOGIN_ON_ACTIVATION:
@@ -148,6 +147,11 @@ def activate(request,
             login(request, user)
             messages.info(request, 'Thanks for registering. You are now logged in.')
         return redirect(post_activation_redirect)
+    else:
+        title = _('Email confirmation unsuccessful')
+        context = {
+            'title': title,
+        }
 
     if extra_context is not None:
         context.update(extra_context)
