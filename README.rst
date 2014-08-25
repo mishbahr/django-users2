@@ -21,8 +21,10 @@ django-users2
     :target: https://pypi.python.org/pypi/django-users2/
     :alt: Supported Python versions
 
+
 .. image:: https://coveralls.io/repos/mishbahr/django-users2/badge.png?branch=master
-    :target: https://coveralls.io/r/mishbahr/django-users2?branch=master
+  :target: https://coveralls.io/r/mishbahr/django-users2?branch=master
+
 
 Custom user model for django >=1.5 with support for multiple user types and
 lots of other awesome utils (mostly borrowed from other projects).
