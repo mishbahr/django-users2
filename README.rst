@@ -76,26 +76,3 @@ Quickstart
     )
 
 which sets up URL patterns for the views in django-users2 as well as several useful views in django.contrib.auth (e.g. login, logout, password change/reset)
-
-
-
-Configuration
------------------------
-
-   USERS_VERIFY_EMAIL = False
-
-Set this to ``True`` to enable email verification for registered users. When new User object is created, its ``is_active`` field is set to ``False``. An activation key is generated, and an email is sent to the user containing a link to click to activate the account.
-Upon clicking the activation link, the new account is made active (i.e. is_active field is set to True); after this, the user can log in.
-
-   USERS_EMAIL_CONFIRMATION_TIMEOUT_DAYS = 3
-
-This is the number of days users will have to activate their accounts after registering. 
-
-    USERS_CREATE_SUPERUSER = settings.DEBUG
-
-    USERS_SUPERUSER_EMAIL = 'superuser@djangoproject.com'
-
-    USERS_SUPERUSER_PASSWORD = 'django'  
-
-Automatically creates django ``superuser`` after ``syncdb``, by default this option is enabled when ``settings.DEBUG = True``. You can customise the email/password by overriding ``USERS_SUPERUSER_EMAIL`` and ``USERS_SUPERUSER_PASSWORD`` setting
-
