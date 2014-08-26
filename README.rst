@@ -2,27 +2,22 @@
 django-users2
 =============================
 
-.. image:: https://travis-ci.org/mishbahr/django-users2.svg?branch=master
+.. image:: http://img.shields.io/travis/mishbahr/django-users2.svg?style=flat-square
     :target: https://travis-ci.org/mishbahr/django-users2/
 
-.. image:: https://pypip.in/version/django-users2/badge.svg
+.. image:: http://img.shields.io/pypi/v/django-users2.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-users2/
     :alt: Latest Version
 
-.. image:: https://pypip.in/download/django-users2/badge.svg
+.. image:: http://img.shields.io/pypi/dm/django-users2.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-users2/
     :alt: Downloads
 
-.. image:: https://pypip.in/license/django-users2/badge.svg
+.. image:: http://img.shields.io/pypi/l/django-users2.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-users2/
     :alt: License
 
-.. image:: https://pypip.in/py_versions/django-users2/badge.svg
-    :target: https://pypi.python.org/pypi/django-users2/
-    :alt: Supported Python versions
-
-
-.. image:: https://coveralls.io/repos/mishbahr/django-users2/badge.png?branch=master
+.. image:: http://img.shields.io/coveralls/mishbahr/django-users2.svg?style=flat-square
   :target: https://coveralls.io/r/mishbahr/django-users2?branch=master
 
 
