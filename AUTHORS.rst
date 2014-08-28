@@ -5,9 +5,9 @@ Credits
 Development Lead
 ----------------
 
-* Mishbah Razzaque <mishbahx@gmail.com>
+* Mishbah Razzaque (mishbahr) <mishbahx@gmail.com>
 
 Contributors
 ------------
 
-None yet. Why not be the first?
+* John Matthew (jfmatth) <john@compunique.com>
