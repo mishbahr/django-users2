@@ -54,7 +54,7 @@ class EmailActivationTokenGenerator(object):
     @staticmethod
     def get_last_login_timestamp(user):
         if user.last_login is not None:
-            return int(user.last_login.strftime('%s'))
+            return int(user.last_login.strftime('%S'))
         return 0
 
     def make_token(self, user):
