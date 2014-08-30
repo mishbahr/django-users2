@@ -50,6 +50,8 @@ Quickstart
 
     INSTALLED_APPS = (
         ...
+        'django.contrib.auth',
+    	'django.contrib.sites',
         'users',
         ...
     )
