@@ -44,7 +44,7 @@ def auto_create_superuser(sender, **kwargs):
         User.base_objects.get(email=email)
     except User.DoesNotExist:
         print('Creating superuser ({1}:{0})'.format(email, password))
-        User.objects.create_superuser(email, password, is_active=True)
+        User.objects.create_superuser(email, password)
 
 signals.post_syncdb.connect(auto_create_superuser, sender=None)
 
