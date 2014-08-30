@@ -21,8 +21,6 @@ except ImportError:
     from django.contrib.sites.models import get_current_site
 
 from .conf import settings
-from .exceptions import InvalidCode, CodeExpired
-
 
 if settings.USERS_CREATE_SUPERUSER:
     # Prevent interactive question about wanting a superuser created.
@@ -43,19 +41,13 @@ def auto_create_superuser(sender, **kwargs):
     try:
         User.base_objects.get(email=email)
     except User.DoesNotExist:
-        print('Creating superuser ({1}:{0})'.format(email, password))
+        print('Creating superuser ({0}:{1})'.format(email, password))
         User.objects.create_superuser(email, password)
 
 signals.post_syncdb.connect(auto_create_superuser, sender=None)
 
 
 class EmailActivationTokenGenerator(object):
-
-    @staticmethod
-    def get_last_login_timestamp(user):
-        if user.last_login is not None:
-            return int(user.last_login.strftime('%s'))
-        return 0
 
     def make_token(self, user):
         return self._make_token_with_timestamp(user, self._num_days(self._today()))
@@ -89,8 +81,8 @@ class EmailActivationTokenGenerator(object):
 
         ts_b36 = int_to_base36(timestamp)
         key_salt = 'users.utils.EmailActivationTokenGenerator'
-        login_timestamp = self.get_last_login_timestamp(user)
-
+        login_timestamp = '' if user.last_login is None else \
+            user.last_login.replace(microsecond=0, tzinfo=None)
         value = (six.text_type(user.pk) + six.text_type(user.email) +
                  six.text_type(login_timestamp) + six.text_type(timestamp))
         hash = salted_hmac(key_salt, value).hexdigest()[::2]
