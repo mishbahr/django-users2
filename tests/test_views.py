@@ -50,6 +50,17 @@ class RegisterViewTest(TestCase):
         resp = self.client.post(reverse('users_register'), self.user_data)
         self.assertEqual(get_user_model().objects.all().count(), 1)
 
+    @override_settings(LOGIN_REDIRECT_URL=reverse('users_registration_complete'))
+    def test_authenticated_users_are_redirected(self):
+        user = get_user_model().objects.create_user(
+            self.user_data['email'], self.user_data['password1'], is_active=True)
+        login = self.client.login(
+            username=self.user_data['email'],
+            password=self.user_data['password1'])
+        self.assertEqual(login, True)
+        resp = self.client.post(reverse('users_register'), self.user_data)
+        self.assertRedirects(resp, reverse('users_registration_complete'))
+
     @override_settings(USERS_VERIFY_EMAIL=True)
     def test_registered_user_is_not_active(self):
         resp = self.client.post(reverse('users_register'), self.user_data)
