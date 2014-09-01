@@ -80,3 +80,13 @@ class ActivationViewTest(TestCase):
 
         new_user = get_user_model().objects.get(email=self.user_data['email'])
         self.assertTrue(new_user.is_active)
+
+    @override_settings(USERS_VERIFY_EMAIL=True)
+    def test_activation_view_fails_as_expected(self):
+        url = reverse('users_activate', kwargs={
+            'uidb64': 'MQ',
+            'token': 'bad-69b5cdcd57c6854d1b04'
+        })
+        resp = self.client.get(url)
+        self.assertEqual(200, resp.status_code)
+        self.failUnless(resp.context['title'], 'Email confirmation unsuccessful')
