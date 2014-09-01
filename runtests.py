@@ -19,9 +19,16 @@ try:
             'django.contrib.contenttypes',
             'django.contrib.sites',
             'django.contrib.staticfiles',
+            'django.contrib.messages',
             'users',
             'example',  # used for testing user model subclasses
         ],
+        MIDDLEWARE_CLASSES=(
+            'django.middleware.common.CommonMiddleware',
+            'django.contrib.sessions.middleware.SessionMiddleware',
+            'django.contrib.auth.middleware.AuthenticationMiddleware',
+            'django.contrib.messages.middleware.MessageMiddleware',
+        ),
         PASSWORD_HASHERS=(
             'django.contrib.auth.hashers.SHA1PasswordHasher',
         ),
