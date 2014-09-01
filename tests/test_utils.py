@@ -65,6 +65,21 @@ class EmailActivationTokenGeneratorTest(TestCase):
         token = token_generator.make_token(user)
         self.assertTrue(token_generator.check_token(user, token))
 
+    def test_bad_token(self):
+        """
+        Ensure bad activation keys are rejected
+        """
+        user = self.create_user()
+
+        token_generator = EmailActivationTokenGenerator()
+        bad_activation_keys = (
+            'emailactivationtokengenerator',
+            'emailactivation-tokengenerator',
+            '3rd-bademailactivationkey'
+        )
+        for key in bad_activation_keys:
+            self.assertFalse(token_generator.check_token(user, key))
+
     def test_timeout(self):
         """
         Ensure we can use the token after n days, but no greater.
