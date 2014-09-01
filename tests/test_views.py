@@ -7,7 +7,7 @@ from django.test.utils import override_settings
 
 from django.core import mail
 from django.core.urlresolvers import reverse
-from django.contrib.auth import get_user_model, SESSION_KEY
+from django.contrib.auth import get_user_model
 
 
 from users.forms import RegistrationForm, RegistrationFormHoneypot
