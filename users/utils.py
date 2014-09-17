@@ -5,9 +5,6 @@ from django.db.models import signals
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth import get_user_model
-from django.contrib.auth.management import create_superuser
-from django.contrib.auth import models as auth_app
-
 from django.utils.http import int_to_base36, base36_to_int
 from django.utils.crypto import constant_time_compare, salted_hmac
 
@@ -23,11 +20,18 @@ except ImportError:
 from .conf import settings
 
 if settings.USERS_CREATE_SUPERUSER:
-    # Prevent interactive question about wanting a superuser created.
-    signals.post_syncdb.disconnect(
-        create_superuser,
-        sender=auth_app,
-        dispatch_uid='django.contrib.auth.management.create_superuser')
+    try:
+        # create_superuser is removed in django 1.7
+        from django.contrib.auth.management import create_superuser
+    except ImportError:
+        pass
+    else:
+        # Prevent interactive question about wanting a superuser created.
+        from django.contrib.auth import models as auth_app
+        signals.post_syncdb.disconnect(
+            create_superuser,
+            sender=auth_app,
+            dispatch_uid='django.contrib.auth.management.create_superuser')
 
 
 def auto_create_superuser(sender, **kwargs):
