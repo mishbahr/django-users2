@@ -1,23 +1,22 @@
 from django.contrib import messages
-from django.utils.translation import ugettext as _
+from django.contrib.auth import get_user_model, login
 from django.core.urlresolvers import reverse
-
+from django.shortcuts import redirect, resolve_url
 from django.template.response import TemplateResponse
-from django.views.decorators.csrf import csrf_protect
+from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
-from django.utils.http import urlsafe_base64_decode
-from django.shortcuts import resolve_url, redirect
-from django.contrib.auth import get_user_model
-from django.contrib.auth import login
+from django.views.decorators.csrf import csrf_protect
+
+from .compat import urlsafe_base64_decode
+from .conf import settings
+from .signals import user_activated, user_registered
+from .utils import EmailActivationTokenGenerator, send_activation_email
 
 try:
     from django.contrib.sites.shortcuts import get_current_site
 except ImportError:
     from django.contrib.sites.models import get_current_site
 
-from .conf import settings
-from .utils import EmailActivationTokenGenerator, send_activation_email
-from .signals import user_registered, user_activated
 
 if settings.USERS_SPAM_PROTECTION:
     from .forms import RegistrationFormHoneypot as RegistrationForm
@@ -170,4 +169,3 @@ def activation_complete(request,
         context.update(extra_context)
     return TemplateResponse(request, template_name, context,
                             current_app=current_app)
-
