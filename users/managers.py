@@ -8,6 +8,18 @@ from .conf import settings
 
 class UserManager(BaseUserManager):
 
+    def get_queryset(self):
+        """
+        Fixes get_query_set vs get_queryset for Django <1.6
+        """
+        try:
+            qs = super(UserManager, self).get_queryset()
+        except AttributeError:
+            qs = super(UserManager, self).get_query_set()
+        return qs
+
+    get_query_set = get_queryset
+
     def _create_user(self, email, password,
                      is_staff, is_superuser, **extra_fields):
 
@@ -39,3 +51,5 @@ class UserManager(BaseUserManager):
 class UserInheritanceManager(UserManager):
     def get_queryset(self):
         return InheritanceQuerySet(self.model).select_subclasses()
+
+    get_query_set = get_queryset
