@@ -43,3 +43,6 @@ docs/_build
 
 #pycharm
 .idea/
+
+#coverage
+htmlcov
