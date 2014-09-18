@@ -3,7 +3,6 @@ from django.utils import six
 
 from django.db.models import signals
 from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth import get_user_model
 from django.utils.http import int_to_base36, base36_to_int
 from django.utils.crypto import constant_time_compare, salted_hmac
@@ -18,6 +17,7 @@ except ImportError:
     from django.contrib.sites.models import get_current_site
 
 from .conf import settings
+from .compat import urlsafe_base64_encode
 
 if settings.USERS_CREATE_SUPERUSER:
     try:
@@ -133,3 +133,4 @@ def send_activation_email(
             email_message.attach_alternative(html_email, 'text/html')
 
         email_message.send()
+
