@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.test import TestCase
-from django.utils.translation import ugettext as _
-from django.utils.encoding import force_text
 from django.contrib.auth import get_user_model
+from django.test import TestCase
+from django.utils.encoding import force_text
+from django.utils.translation import ugettext as _
 
-from users.forms import (UserCreationForm,
-                         UserChangeForm,
-                         RegistrationFormTermsOfService,
-                         RegistrationFormHoneypot)
+from users.forms import (RegistrationFormHoneypot,
+                         RegistrationFormTermsOfService, UserChangeForm,
+                         UserCreationForm)
 
 
 class UserCreationFormTest(TestCase):

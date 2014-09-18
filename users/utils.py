@@ -1,23 +1,22 @@
 from datetime import date
-from django.utils import six
 
-from django.db.models import signals
-from django.utils.encoding import force_bytes
 from django.contrib.auth import get_user_model
-from django.utils.http import int_to_base36, base36_to_int
-from django.utils.crypto import constant_time_compare, salted_hmac
-
-from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
+from django.db.models import signals
+from django.template.loader import render_to_string
+from django.utils import six
+from django.utils.crypto import constant_time_compare, salted_hmac
+from django.utils.encoding import force_bytes
+from django.utils.http import base36_to_int, int_to_base36
 
+from .compat import urlsafe_base64_encode
+from .conf import settings
 
 try:
     from django.contrib.sites.shortcuts import get_current_site
 except ImportError:
     from django.contrib.sites.models import get_current_site
 
-from .conf import settings
-from .compat import urlsafe_base64_encode
 
 if settings.USERS_CREATE_SUPERUSER:
     try:
@@ -133,4 +132,3 @@ def send_activation_email(
             email_message.attach_alternative(html_email, 'text/html')
 
         email_message.send()
-

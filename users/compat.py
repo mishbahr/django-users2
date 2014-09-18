@@ -1,7 +1,6 @@
 import base64
 from binascii import Error as BinasciiError
 
-
 try:
     from django.utils.http import urlsafe_base64_encode
 except ImportError:

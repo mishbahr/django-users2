@@ -1,9 +1,8 @@
-from django import forms
-from django import template
+from django import forms, template
+from users.fields import HoneyPotField
 
 register = template.Library()
 
-from users.fields import HoneyPotField
 
 
 @register.filter

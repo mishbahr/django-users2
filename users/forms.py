@@ -4,7 +4,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.translation import ugettext_lazy as _
 
 from .conf import settings
-from .fields import UsersEmailField, PasswordField, HoneyPotField
+from .fields import HoneyPotField, PasswordField, UsersEmailField
 
 
 class UserCreationForm(forms.ModelForm):

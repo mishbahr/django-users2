@@ -1,5 +1,5 @@
-from django.utils import timezone
 from django.contrib.auth.models import BaseUserManager
+from django.utils import timezone
 
 from model_utils.managers import InheritanceQuerySet
 

@@ -1,12 +1,11 @@
-from django.contrib import admin
+from django.contrib import admin, messages
+from django.contrib.admin.util import model_ngettext
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import ugettext_lazy as _
-from django.contrib import messages
-from django.contrib.admin.util import model_ngettext
 
 from .conf import settings
-from .models import User
 from .forms import UserChangeForm, UserCreationForm
+from .models import User
 from .utils import send_activation_email
 
 

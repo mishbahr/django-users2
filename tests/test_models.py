@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.test import TestCase
-
 from django.contrib.auth import get_user_model
 from django.core import mail
+from django.test import TestCase
 
 
 class TestUsersModels(TestCase):
@@ -67,4 +66,3 @@ class TestUsersModels(TestCase):
     def test_(self):
         user = self.create_user()
         self.assertIsNotNone(user.user_type)
-

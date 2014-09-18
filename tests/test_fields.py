@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from django import forms
 from django.test import TestCase
 from django.test.utils import override_settings
-from django import forms
 
-from users.fields import (LengthValidator,
-                          ComplexityValidator,
-                          EmailDomainValidator)
+from users.fields import (ComplexityValidator, EmailDomainValidator,
+                          LengthValidator)
 
 
 class LengthValidatorTest(TestCase):

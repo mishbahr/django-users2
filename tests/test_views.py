@@ -2,13 +2,11 @@
 # -*- coding: utf-8 -*-
 import re
 
-from django.test import TestCase
-from django.test.utils import override_settings
-
+from django.contrib.auth import get_user_model
 from django.core import mail
 from django.core.urlresolvers import reverse
-from django.contrib.auth import get_user_model
-
+from django.test import TestCase
+from django.test.utils import override_settings
 
 from users.forms import RegistrationForm, RegistrationFormHoneypot
 

@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.test import TestCase
-from django.test.utils import override_settings
-from django.test.client import RequestFactory
-from django.core import mail
-from django.contrib.auth import get_user_model
 from django.contrib.admin.sites import AdminSite
+from django.contrib.auth import get_user_model
 from django.contrib.messages.storage.fallback import FallbackStorage
+from django.core import mail
+from django.test import TestCase
+from django.test.client import RequestFactory
+from django.test.utils import override_settings
 
 from users.admin import UserAdmin
 

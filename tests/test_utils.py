@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from datetime import date, timedelta
+
+from django.contrib.auth import get_user_model
+from django.core import mail
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import RequestFactory
-from django.core.urlresolvers import reverse
-from django.core import mail
 from django.test.utils import override_settings
-from django.contrib.auth import get_user_model
 
 from users.conf import settings
-from users.utils import (EmailActivationTokenGenerator,
-                         auto_create_superuser,
+from users.utils import (auto_create_superuser, EmailActivationTokenGenerator,
                          send_activation_email)
 
 
@@ -102,5 +102,3 @@ class EmailActivationTokenGeneratorTest(TestCase):
 
         p2 = Mocked(date.today() + timedelta(settings.USERS_EMAIL_CONFIRMATION_TIMEOUT_DAYS + 1))
         self.assertFalse(p2.check_token(user, token))
-
-

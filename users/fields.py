@@ -1,10 +1,10 @@
 import string
 
 from django import forms
-from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import force_text
 from django.core.validators import validate_email
 from django.forms.widgets import CheckboxInput
+from django.utils.encoding import force_text
+from django.utils.translation import ugettext_lazy as _
 
 from .conf import settings
 
