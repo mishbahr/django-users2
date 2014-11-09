@@ -1,7 +1,7 @@
 {% load form_tags %}
 
 {% if field.is_hidden %}
-    {{ field }}
+	{{ field }}
 {% elif field|is_honeypot %}
 	{% include "users/partials/honeypot.html" %}
 {% else %}
@@ -25,5 +25,3 @@
 		{% endif %}
 	</div>
 {% endif %}
-
-
