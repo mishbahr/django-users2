@@ -8,8 +8,8 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contenttypes', '0002_remove_content_type_name'),
-        ('auth', '0006_require_contenttypes_0002'),
+        ('contenttypes', '0001_initial'),
+        ('auth', '0001_initial'),
     ]
 
     operations = [
