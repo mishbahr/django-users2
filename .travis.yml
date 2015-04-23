@@ -11,12 +11,15 @@ env:
     - DJANGO="Django==1.5"
     - DJANGO="Django==1.6"
     - DJANGO="Django==1.7"
+    - DJANGO="Django==1.8"
 
 matrix:
     exclude:
-        # Python 2.6 support has been dropped in Django 1.7
+        # Python 2.6 support has been dropped for Django 1.7 onwards
         - python: "2.6"
           env: DJANGO="Django==1.7"
+        - python: "2.6"
+          env: DJANGO="Django==1.8"
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
