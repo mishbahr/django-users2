@@ -8,6 +8,12 @@ from .forms import UserChangeForm, UserCreationForm
 from .models import User
 from .utils import send_activation_email
 
+try:
+    from django.contrib.admin.utils import model_ngettext
+except ImportError:
+    from django.contrib.admin.util import model_ngettext
+
+
 
 class UserModelFilter(admin.SimpleListFilter):
     """
