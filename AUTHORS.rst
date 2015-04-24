@@ -11,3 +11,4 @@ Contributors
 ------------
 
 * John Matthew (jfmatth) <john@compunique.com>
+* moemen <moemenology@gmail.com>
