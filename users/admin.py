@@ -13,7 +13,6 @@ except ImportError:
     from django.contrib.admin.util import model_ngettext
 
 
-
 class UserModelFilter(admin.SimpleListFilter):
     """
     An admin list filter for the UserAdmin which enables

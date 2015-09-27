@@ -5,7 +5,6 @@ from users.fields import HoneyPotField
 register = template.Library()
 
 
-
 @register.filter
 def is_checkbox(field):
     return isinstance(field.field.widget, forms.CheckboxInput)
