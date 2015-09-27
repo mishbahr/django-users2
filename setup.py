@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import codecs
 import os
 import sys
 
@@ -20,14 +21,13 @@ if sys.argv[-1] == 'publish':
     print("  git push --tags")
     sys.exit()
 
-readme = open('README.rst').read()
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
+readme = codecs.open('README.rst', 'r', 'utf-8').read()
 
 setup(
     name='django-users2',
     version=version,
     description="""Custom user model for django >=1.5 with support for multiple user types""",
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     author='Mishbah Razzaque',
     author_email='mishbahx@gmail.com',
     url='https://github.com/mishbahr/django-users2',
@@ -44,7 +44,7 @@ setup(
     zip_safe=False,
     keywords='django-users2',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
