@@ -54,7 +54,10 @@ def register(request,
         form = registration_form(request.POST)
         if form.is_valid():
             user = form.save()
-            if not user.is_active and settings.USERS_VERIFY_EMAIL:
+            if settings.USERS_AUTO_LOGIN_AFTER_REGISTRATION:
+                user.backend = 'django.contrib.auth.backends.ModelBackend'
+                login(request, user)
+            elif not user.is_active and settings.USERS_VERIFY_EMAIL:
                 opts = {
                     'user': user,
                     'request': request,
