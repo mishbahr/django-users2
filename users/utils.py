@@ -1,5 +1,5 @@
 from datetime import date
-
+import django
 from django.contrib.auth import get_user_model
 from django.core.mail import EmailMultiAlternatives
 from django.db.models import signals
@@ -16,6 +16,11 @@ try:
     from django.contrib.sites.shortcuts import get_current_site
 except ImportError:
     from django.contrib.sites.models import get_current_site
+
+# Deprecated since version 1.7:
+# https://docs.djangoproject.com/en/1.8/ref/signals/#post-syncdb
+if django.VERSION >= (1, 7):
+    signals.post_syncdb = signals.post_migrate
 
 
 if settings.USERS_CREATE_SUPERUSER:
