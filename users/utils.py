@@ -1,8 +1,7 @@
 from datetime import date
-import django
+
 from django.contrib.auth import get_user_model
 from django.core.mail import EmailMultiAlternatives
-from django.db.models import signals
 from django.template.loader import render_to_string
 from django.utils import six
 from django.utils.crypto import constant_time_compare, salted_hmac
@@ -14,25 +13,25 @@ from .conf import settings
 
 try:
     from django.contrib.sites.shortcuts import get_current_site
-except ImportError:
+except ImportError:  # pragma: no cover
     from django.contrib.sites.models import get_current_site
 
-# post_syncdb Deprecated since version 1.7:
-# https://docs.djangoproject.com/en/1.8/ref/signals/#post-syncdb
-if django.VERSION >= (1, 9):
-    signals.post_syncdb = signals.post_migrate
+try:
+    from django.db.models.signals import post_migrate
+except ImportError:  # pragma: no cover
+    from django.db.models.signals import post_syncdb as post_migrate
 
 
 if settings.USERS_CREATE_SUPERUSER:
     try:
         # create_superuser is removed in django 1.7
         from django.contrib.auth.management import create_superuser
-    except ImportError:
+    except ImportError:  # pragma: no cover
         pass
     else:
         # Prevent interactive question about wanting a superuser created.
         from django.contrib.auth import models as auth_app
-        signals.post_syncdb.disconnect(
+        post_migrate.disconnect(
             create_superuser,
             sender=auth_app,
             dispatch_uid='django.contrib.auth.management.create_superuser')
@@ -52,7 +51,7 @@ def auto_create_superuser(sender, **kwargs):
         print('Creating superuser ({0}:{1})'.format(email, password))
         User.objects.create_superuser(email, password)
 
-signals.post_syncdb.connect(auto_create_superuser, sender=None)
+post_migrate.connect(auto_create_superuser, sender=None)
 
 
 class EmailActivationTokenGenerator(object):
