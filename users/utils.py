@@ -17,9 +17,9 @@ try:
 except ImportError:
     from django.contrib.sites.models import get_current_site
 
-# Deprecated since version 1.7:
+# post_syncdb Deprecated since version 1.7:
 # https://docs.djangoproject.com/en/1.8/ref/signals/#post-syncdb
-if django.VERSION >= (1, 7):
+if django.VERSION >= (1, 9):
     signals.post_syncdb = signals.post_migrate
 
 
