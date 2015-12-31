@@ -14,11 +14,11 @@ from .utils import EmailActivationTokenGenerator, send_activation_email
 
 try:
     from django.contrib.sites.shortcuts import get_current_site
-except ImportError:
+except ImportError:  # pragma: no cover
     from django.contrib.sites.models import get_current_site
 
 
-if settings.USERS_SPAM_PROTECTION:
+if settings.USERS_SPAM_PROTECTION:  # pragma: no cover
     from .forms import RegistrationFormHoneypot as RegistrationForm
 else:
     from .forms import RegistrationForm
@@ -81,7 +81,7 @@ def register(request,
         'title': _('Register'),
     }
 
-    if extra_context is not None:
+    if extra_context is not None:  # pragma: no cover
         context.update(extra_context)
     return TemplateResponse(request, template_name, context,
                             current_app=current_app)
@@ -94,7 +94,7 @@ def registration_closed(request,
     context = {
         'title': _('Registration closed'),
     }
-    if extra_context is not None:
+    if extra_context is not None:  # pragma: no cover
         context.update(extra_context)
     return TemplateResponse(request, template_name, context,
                             current_app=current_app)
@@ -108,7 +108,7 @@ def registration_complete(request,
         'login_url': resolve_url(settings.LOGIN_URL),
         'title': _('Registration complete'),
     }
-    if extra_context is not None:
+    if extra_context is not None:  # pragma: no cover
         context.update(extra_context)
     return TemplateResponse(request, template_name, context,
                             current_app=current_app)
@@ -155,7 +155,7 @@ def activate(request,
             'title': title,
         }
 
-    if extra_context is not None:
+    if extra_context is not None:  # pragma: no cover
         context.update(extra_context)
     return TemplateResponse(request, template_name, context,
                             current_app=current_app)
@@ -168,7 +168,7 @@ def activation_complete(request,
     context = {
         'title': _('Activation complete'),
     }
-    if extra_context is not None:
+    if extra_context is not None:  # pragma: no cover
         context.update(extra_context)
     return TemplateResponse(request, template_name, context,
                             current_app=current_app)

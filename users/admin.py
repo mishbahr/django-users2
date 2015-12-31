@@ -9,7 +9,7 @@ from .utils import send_activation_email
 
 try:
     from django.contrib.admin.utils import model_ngettext
-except ImportError:
+except ImportError:  # pragma: no cover
     from django.contrib.admin.util import model_ngettext
 
 

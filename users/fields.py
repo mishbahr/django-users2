@@ -37,7 +37,7 @@ class ComplexityValidator(object):
         self.password_policy = settings.USERS_PASSWORD_POLICY
 
     def __call__(self, value):
-        if not settings.USERS_CHECK_PASSWORD_COMPLEXITY:
+        if not settings.USERS_CHECK_PASSWORD_COMPLEXITY:  # pragma: no cover
             return
 
         uppercase, lowercase, digits, non_ascii, punctuation = set(), set(), set(), set(), set()
@@ -109,7 +109,7 @@ class EmailDomainValidator(object):
         self.domain_whitelist = settings.USERS_EMAIL_DOMAINS_WHITELIST
 
     def __call__(self, value):
-        if not settings.USERS_VALIDATE_EMAIL_DOMAIN:
+        if not settings.USERS_VALIDATE_EMAIL_DOMAIN:  # pragma: no cover
             return
 
         if not value or '@' not in value:

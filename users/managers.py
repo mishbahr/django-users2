@@ -14,7 +14,7 @@ class UserManager(BaseUserManager):
         """
         try:
             qs = super(UserManager, self).get_queryset()
-        except AttributeError:
+        except AttributeError:  # pragma: no cover
             qs = super(UserManager, self).get_query_set()
         return qs
 
