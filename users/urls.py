@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.contrib.auth.views import (login, logout, password_change,
                                        password_change_done, password_reset,
                                        password_reset_complete,
@@ -8,8 +8,7 @@ from django.contrib.auth.views import (login, logout, password_change,
 from .views import (activate, activation_complete, register,
                     registration_closed, registration_complete)
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^register/$', register, name='users_register'),
     url(r'^register/closed/$', registration_closed, name='users_registration_closed'),
     url(r'^register/complete/$', registration_complete, name='users_registration_complete'),
@@ -49,4 +48,4 @@ urlpatterns = patterns(
     url(r'^reset/done/$', password_reset_complete,
         {'template_name': 'users/password_reset_complete.html'},
         name='users_password_reset_complete'),
-)
+]
