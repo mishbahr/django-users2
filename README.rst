@@ -60,9 +60,9 @@ Quickstart
 
     AUTH_USER_MODEL = 'users.User'
 
-4. Once you’ve done this, run the syncdb command to install the model used by this package::
+4. Once you’ve done this, run the ``migrate`` command to install the model used by this package::
 
-    python manage.py syncdb
+    python manage.py migrate
 
 5. Add the `django-users2` URLs to your project’s URLconf as follows::
 
