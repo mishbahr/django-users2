@@ -83,8 +83,7 @@ def register(request,
 
     if extra_context is not None:  # pragma: no cover
         context.update(extra_context)
-    return TemplateResponse(request, template_name, context,
-                            current_app=current_app)
+    return TemplateResponse(request, template_name, context)
 
 
 def registration_closed(request,
@@ -96,8 +95,7 @@ def registration_closed(request,
     }
     if extra_context is not None:  # pragma: no cover
         context.update(extra_context)
-    return TemplateResponse(request, template_name, context,
-                            current_app=current_app)
+    return TemplateResponse(request, template_name, context)
 
 
 def registration_complete(request,
@@ -110,8 +108,7 @@ def registration_complete(request,
     }
     if extra_context is not None:  # pragma: no cover
         context.update(extra_context)
-    return TemplateResponse(request, template_name, context,
-                            current_app=current_app)
+    return TemplateResponse(request, template_name, context)
 
 
 @never_cache
@@ -157,8 +154,7 @@ def activate(request,
 
     if extra_context is not None:  # pragma: no cover
         context.update(extra_context)
-    return TemplateResponse(request, template_name, context,
-                            current_app=current_app)
+    return TemplateResponse(request, template_name, context)
 
 
 def activation_complete(request,
@@ -170,5 +166,4 @@ def activation_complete(request,
     }
     if extra_context is not None:  # pragma: no cover
         context.update(extra_context)
-    return TemplateResponse(request, template_name, context,
-                            current_app=current_app)
+    return TemplateResponse(request, template_name, context)
