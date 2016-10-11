@@ -2,6 +2,12 @@ from django.contrib import admin, messages
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import ugettext_lazy as _
 
+try:
+    from django.contrib.admin.utils import model_ngettext
+except ImportError:
+    # To support django < 1.7
+    from django.contrib.admin.util import model_ngettext
+
 from .conf import settings
 from .forms import UserChangeForm, UserCreationForm
 from .models import User
