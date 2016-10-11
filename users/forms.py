@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.translation import ugettext_lazy as _
+from .models import Profile
 
 from .conf import settings
 from .fields import HoneyPotField, PasswordField, UsersEmailField
@@ -14,6 +15,9 @@ class UserCreationForm(forms.ModelForm):
         'password_mismatch': _('The two password fields didn\'t match.'),
     }
 
+    username = forms.CharField(max_length=30)
+    first_name = forms.CharField(label=_('First Name'),max_length=30,required=False)
+    last_name = forms.CharField(label=_('Last Name'),max_length=30,required=False)
     email = UsersEmailField(label=_('Email Address'), max_length=255)
     password1 = PasswordField(label=_('Password'))
     password2 = PasswordField(
@@ -53,8 +57,11 @@ class UserCreationForm(forms.ModelForm):
         user = super(UserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data['password1'])
         user.is_active = not settings.USERS_VERIFY_EMAIL
+        profile = Profile(username=self.cleaned_data['username'], first_name=self.cleaned_data['first_name'], last_name=self.cleaned_data['last_name'])
         if commit:
             user.save()
+            profile.user = user
+            profile.save()
         return user
 
 
