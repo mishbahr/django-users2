@@ -21,9 +21,10 @@ django-users2
   :target: https://coveralls.io/r/mishbahr/django-users2?branch=master
 
 
-Custom user model for django >=1.11 with support for multiple user types and
+Custom user model for django >=1.5 with support for multiple user types and
 lots of other awesome utils (mostly borrowed from other projects). If you are
-using django < 1.11, you can install `pip install django-users2<=0.2.1`.
+using django < 1.11, please install v0.2.1 or earlier (`pip install
+django-users2<=0.2.1`).
 
 Features
 --------
