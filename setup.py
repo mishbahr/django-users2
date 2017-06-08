@@ -26,7 +26,7 @@ readme = codecs.open('README.rst', 'r', 'utf-8').read()
 setup(
     name='django-users2',
     version=version,
-    description="""Custom user model for django >=1.5 with support for multiple user types""",
+    description="""Custom user model for django >=1.11 with support for multiple user types""",
     long_description=readme,
     author='Mishbah Razzaque',
     author_email='mishbahx@gmail.com',
@@ -36,7 +36,7 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        'django>=1.5',
+        'django>=1.11',
         'django-model-utils',
         'django-appconf',
     ],
@@ -46,9 +46,7 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Framework :: Django',
-        'Framework :: Django :: 1.8',
-        'Framework :: Django :: 1.9',
-        'Framework :: Django :: 1.10',
+        'Framework :: Django :: 1.11',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
