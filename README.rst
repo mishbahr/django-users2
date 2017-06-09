@@ -22,7 +22,9 @@ django-users2
 
 
 Custom user model for django >=1.5 with support for multiple user types and
-lots of other awesome utils (mostly borrowed from other projects).
+lots of other awesome utils (mostly borrowed from other projects). If you are
+using django < 1.11, please install v0.2.1 or earlier (`pip install
+django-users2<=0.2.1`).
 
 Features
 --------
