@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
                 ('groups', models.ManyToManyField(to='auth.Group', verbose_name='groups', blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user')),
                 ('user_permissions', models.ManyToManyField(to='auth.Permission', verbose_name='user permissions', blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user')),
-                ('user_type', models.ForeignKey(editable=False, to='contenttypes.ContentType', null=True)),
+                ('user_type', models.ForeignKey(editable=False, on_delete=models.SET_NULL, to='contenttypes.ContentType', null=True)),
             ],
             options={
                 'abstract': False,

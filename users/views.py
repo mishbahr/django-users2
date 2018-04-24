@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import redirect, resolve_url
 from django.template.response import TemplateResponse
 from django.utils.translation import ugettext as _
@@ -41,7 +41,7 @@ def register(request,
     if registered_user_redirect_to is None:
         registered_user_redirect_to = getattr(settings, 'LOGIN_REDIRECT_URL')
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
             return redirect(registered_user_redirect_to)
 
     if not settings.USERS_REGISTRATION_OPEN:
