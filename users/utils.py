@@ -121,7 +121,7 @@ def send_activation_email(
             'expiration_days': settings.USERS_EMAIL_CONFIRMATION_TIMEOUT_DAYS,
             'user': user,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-            'token': token_generator.make_token(user=user),
+            'token': str(token_generator.make_token(user=user),encoding='ascii'),
             'protocol': 'https' if request.is_secure() else 'http',
         }
 
