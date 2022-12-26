@@ -1,4 +1,4 @@
 -e .
-wheel==0.24.0
+wheel==0.38.1
 
 # Additional requirements go here
